@@ -2,3 +2,4 @@ Welcome to the Bin Bash Bot!
 Here is an overview over the commands:
 bbb help    -   Sends the help you are currently seeing
 bbb roles   -   Add yourself roles you want to get pinged if there are questions or news
+bbb appdata <name>  -   Outputs the content of various platforms for a specific application
