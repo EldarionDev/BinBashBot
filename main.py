@@ -41,6 +41,7 @@ class BinBashBotClient(discord.Client):
             return
         if message.content.startswith("bbb ping"):
             await message.channel.send("Pong")
+            return
         if message.content.startswith("bbb"):
             await message.channel.send("I am a slave of your will. If you need help simply type bbb help and I'll "
                                        "immediately serve you!")

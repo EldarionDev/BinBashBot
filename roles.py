@@ -77,7 +77,10 @@ class Roles:
                 for j in currentContent:
                     if j == "help.txt":
                         continue
-                    string = string + "**" + j + "**" + "\n"
+                    if os.path.isfile(self.userList[i].getCurrentDir() + j):
+                        string = string + "**" + j + "**" + " *(Role)*" + "\n"
+                    else:
+                        string = string = string + "**" + j + "**" + " *(Directory + Role)*" + "\n"
                 out = infoText + capitalText + string
                 if out == "":
                     await message.channel.send("The requested role directory could not be found!")
