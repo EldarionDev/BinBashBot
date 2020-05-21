@@ -1,5 +1,7 @@
 import os
 
+import discord
+
 
 class User:
     def __init__(self, name):
@@ -40,6 +42,18 @@ class Roles:
                 return
             i = i + 1
 
+    async def removeRole(self, message):
+        content = message.content.split(" ")
+        roleName = content[3]
+        role = discord.utils.get(message.guild.roles, name=roleName)
+        await message.author.remove_roles(role)
+
+    async def addRole(self, message):
+        content = message.content.split(" ")
+        roleName = content[3]
+        role = discord.utils.get(message.guild.roles, name=roleName)
+        await message.author.add_roles(role)
+
     async def printDir(self, message):
         i = 0
         while i < self.currentUserCount:
@@ -51,10 +65,14 @@ class Roles:
                             "Use *bbb roles remove* to remove a role.\n")
                 capitalText = "**THE ROLES IN THIS DIRECTORY:**\n"
                 string = ""
+                out = ""
                 for j in currentContent:
                     if j == "help.txt":
                         continue
                     string = string + "**" + j + "**" + "\n"
                 out = infoText + capitalText + string
+                if out == "":
+                    await message.channel.send("The requested role directory could not be found!")
+                    return
                 await message.channel.send(out)
                 return
