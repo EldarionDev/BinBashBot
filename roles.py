@@ -46,13 +46,21 @@ class Roles:
         content = message.content.split(" ")
         roleName = content[3]
         role = discord.utils.get(message.guild.roles, name=roleName)
-        await message.author.remove_roles(role)
+        try:
+            await message.author.remove_roles(role)
+            await message.channel.send("Role has been successfully added!")
+        except:
+            await message.channel.send("The role you entered is not existing")
 
     async def addRole(self, message):
         content = message.content.split(" ")
         roleName = content[3]
         role = discord.utils.get(message.guild.roles, name=roleName)
-        await message.author.add_roles(role)
+        try:
+            await message.author.add_roles(role)
+            await message.channel.send("Role has been successfully added!")
+        except:
+            await message.channel.send("The role you entered is not existing")
 
     async def printDir(self, message):
         i = 0
