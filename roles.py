@@ -48,7 +48,6 @@ class Roles:
         role = discord.utils.get(message.guild.roles, name=roleName)
         try:
             await message.author.remove_roles(role)
-            await message.channel.send("Role has been successfully added!")
         except:
             await message.channel.send("The role you entered is not existing")
 
@@ -58,7 +57,6 @@ class Roles:
         role = discord.utils.get(message.guild.roles, name=roleName)
         try:
             await message.author.add_roles(role)
-            await message.channel.send("Role has been successfully added!")
         except:
             await message.channel.send("The role you entered is not existing")
 
