@@ -54,6 +54,7 @@ class Roles:
         role = discord.utils.get(message.guild.roles, name=roleName)
         try:
             await message.author.remove_roles(role)
+            await message.channel.send("Successfully removed " + roleName + " to " + message.author.display_name)
         except:
             await message.channel.send("The role you entered is not existing")
 
