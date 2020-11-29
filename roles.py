@@ -1,6 +1,7 @@
 import os
 
 import discord
+from discord import Guild, Role
 
 
 class User:
@@ -20,8 +21,13 @@ class Roles:
         print("Roles initialized.")
         self.currentUserCount = 0
         self.userList = []
+        self.roleNames = []
+        for subdirs, dirs, files in os.walk("assets/"):
+            for f in files:
+                self.roleNames.append(f)
 
-    def addUser(self, message):
+    async def addUser(self, message):
+        # Fix User counting
         self.userList.append(User(message.author))
         self.userList[self.currentUserCount].setCurrentDir("assets/")
         self.currentUserCount = self.currentUserCount + 1
@@ -57,8 +63,16 @@ class Roles:
         role = discord.utils.get(message.guild.roles, name=roleName)
         try:
             await message.author.add_roles(role)
+            await message.channel.send("Successfully added " + roleName + " to " + message.author.display_name)
         except:
-            await message.channel.send("The role you entered is not existing")
+            for s in self.roleNames:
+                if s == roleName:
+                    await message.author.guild.create_role(name=roleName)
+                    role = discord.utils.get(message.guild.roles, name=roleName)
+                    await message.author.add_roles(role)
+                    await message.channel.send("Successfully added " + roleName + " to " + message.author.display_name)
+                    return
+            await message.channel.send("The role " + roleName + " you entered is not existing")
 
     async def printDir(self, message):
         i = 0

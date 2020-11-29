@@ -36,7 +36,7 @@ class BinBashBotClient(discord.Client):
             await roleInstance.removeRole(message)
             return
         if message.content.startswith("bbb roles"):
-            roleInstance.addUser(message)
+            await roleInstance.addUser(message)
             await roleInstance.printDir(message)
             return
         if message.content.startswith("bbb ping"):
